@@ -1,0 +1,22 @@
+// 重置样式 element-ui 样式
+
+// 布局样式
+.el-container {
+  padding: 0;
+}
+.el-header {
+  padding: 0;
+}
+.el-main {
+  padding: 0;
+}
+.el-aside {
+  padding: 0;
+}
+
+// 输入框
+.el-input.is-active .el-input__inner,
+.el-input__inner:focus {
+  border-color: #ff6c5f;
+  box-shadow: 0 0 0 0.2rem rgba(255, 108, 95, 0.25);
+}
