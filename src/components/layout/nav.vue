@@ -60,12 +60,14 @@ const onBlurChange = () => {
 .qxw-nav {
   position: fixed;
   top: 0;
+  width: 960px;
+  height: 52px;
   width: 100%;
   height: 54px;
-  border-top: 2px solid #ff6c5f;
-//   border-bottom: 1px solid #f1f1f1;
-  background: rgba(54, 57, 63, 0.4);
-//   backdrop-filter: saturate(180%) blur(20px);
+  background: #FFFFFF;
+  border-top: 2px solid $primary;
+  box-shadow: 0px 8px 16px rgba(10, 10, 10, 0.1);
+  backdrop-filter: saturate(180%) blur(20px);
   z-index: 999;
   .nav-container {
     display: flex;
