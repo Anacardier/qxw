@@ -1,8 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import ElementPlus from "element-plus";
+import '@/assets/css/media.css';
 import "bulma/css/bulma.css"
 import '@/assets/css/base.css';
-import ElementPlus from "element-plus";
 import 'element-plus/packages/theme-chalk/src/base.scss'
 import 'element-plus/lib/theme-chalk/index.css';
 import '@/assets/css/resets.scss';

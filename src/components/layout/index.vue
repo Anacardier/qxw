@@ -1,6 +1,6 @@
 <template>
   <el-container class="qxw">
-    <el-header height="54px" class="qxw-header">
+    <el-header height="auto" class="qxw-header">
       <Nav />
     </el-header>
     <el-main>
