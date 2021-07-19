@@ -271,4 +271,73 @@ const onChangeNav = (idx) => {
     }
   }
 }
+@media screen and (max-width: 750px) {
+  .home {
+    margin-top: 1.13rem;
+    .nav {
+      margin-bottom: 1.25rem;
+      .nav-item {
+        font-size: 1.13rem;
+        margin-right: 1.5rem;
+      }
+    }
+    .list {
+      .item-card {
+        flex-wrap: wrap;
+        width: 18.81rem;
+        margin-bottom: 1.13rem;
+        img {
+          width: 100%;
+          height: 9.75rem;
+        }
+        .content {
+          width: 100%;
+          padding: 1rem 2rem;
+          .game-title {
+            height: 1.88rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            line-height: 1.88rem;
+            color: $text-bold;
+            text-align: center;
+          }
+          .game-desc {
+            font-size: 1.13rem;
+            font-weight: 400;
+            line-height: 1.44rem;
+            color: $text-light;
+            margin-top: 0.63rem;
+            margin-bottom: 1.25rem;
+          }
+          .game-footer {
+            display: flex;
+            justify-content: space-between;
+            & > div {
+              height: 1.25rem;
+              line-height: 1.25rem;
+              font-size: 1rem;
+              font-weight: bold;
+              cursor: pointer;
+              transition: color 0.3s;
+            }
+            .collection {
+              color: $red;
+              &:hover,
+              &.active {
+                color: $red-light;
+              }
+            }
+            .game-test {
+              color: $primary-dark;
+              &:hover,
+              &.active {
+                color: $primary;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <el-container class="qxw">
-    <el-header height="auto" class="qxw-header">
+    <el-header height="auto">
       <Nav />
     </el-header>
     <el-main>
@@ -14,5 +14,4 @@ import Nav from "./nav.vue"
 </script>
 
 <style lang="scss" scoped>
-
 </style>
