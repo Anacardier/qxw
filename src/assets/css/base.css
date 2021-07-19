@@ -184,11 +184,11 @@ sub {
 }
 
 a {
-  color: #333;
+  color: #4a4a4a;
 }
 
 a:hover {
-  color: #ff6c5f;
+  color: #AE98BE;
   transition: color .3s;
 }
 

@@ -1,7 +1,7 @@
 <template>
   <el-container class="qxw">
-    <el-header height="54px" class="qxw-header">
-      <Nav />
+    <el-header height="57px" class="qxw-header">
+        <Nav />
     </el-header>
     <el-main>
       <router-view />

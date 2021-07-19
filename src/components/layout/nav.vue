@@ -1,22 +1,24 @@
 <template>
   <div class="qxw-nav">
-    <div class="nav-container">
+    <div class="nav-container container">
       <a href="/" class="logo">
-        <img
-          src="~@/assets/images/logo.png"
-          width="120"
-          height="30"
-          alt="创乐坊"
-        />
+        <img src="~@/assets/images/logo.svg" alt="抢先玩">
       </a>
       <div class="nav-bar">
-        <ul class="nav-list">
-          <li class="nav-item" v-for="(item, index) in state.list" :key="index">
-            <router-link :to="item.link">
-              {{ item.name }}
+        <div class="nav-list">
+          <ul>
+            <li class="nav-item" v-for="(item, index) in state.list" :key="index">
+              <router-link :to="item.link">
+                {{ item.name }}
+              </router-link>
+            </li>
+          </ul>
+          <div class="nav-help">
+            <router-link to="/home">
+              如何参与抢鲜玩？
             </router-link>
-          </li>
-        </ul>
+          </div>
+        </div>
         <div class="nav-bar-auth">
           <el-input
             :class="state.isFocus ? 'focus' : ''"
@@ -26,7 +28,10 @@
             suffix-icon="el-icon-search"
             placeholder="请输入内容"
           ></el-input>
-          <div class="login">注册/登录</div>
+          <div class="login">
+            <el-button class="qxw-login" type="primary">登录</el-button>
+            <el-button class="qxw-reg" type="text">注册</el-button>
+          </div>
         </div>
       </div>
     </div>
@@ -39,7 +44,7 @@ import { reactive } from "vue";
 const state = reactive({
   list: [
     {
-      name: "抢先玩",
+      name: "首页",
       link: "/home",
     },
   ],
@@ -60,67 +65,111 @@ const onBlurChange = () => {
 .qxw-nav {
   position: fixed;
   top: 0;
-  width: 960px;
-  height: 52px;
   width: 100%;
-  height: 54px;
+  height: 3.38rem;
+  padding: .44rem 0;
   background: #FFFFFF;
   border-top: 2px solid $primary;
-  box-shadow: 0px 8px 16px rgba(10, 10, 10, 0.1);
-  backdrop-filter: saturate(180%) blur(20px);
+  box-shadow: 0px .5rem 1rem rgba(10, 10, 10, 0.1);
+  backdrop-filter: saturate(180%) blur(1.25rem);
   z-index: 999;
   .nav-container {
     display: flex;
-    max-width: 1200px;
-    min-width: 780px;
     margin: 0 auto;
   }
   .logo {
-    margin-top: 12px;
-    margin-right: 15px;
+    width: 3.25rem;
+    height: 2.38rem;
+    margin-right: 2rem;
+    overflow: hidden;
     img {
-      vertical-align: middle;
+      width: 100%;
+      height: 100%;
     }
   }
   .nav-bar {
     display: flex;
     width: 100%;
     height: 100%;
-    line-height: 54px;
+    line-height: 2.38rem;
+    font-size: .88rem;
     justify-content: space-between;
     .nav-list {
       display: flex;
       .nav-item {
-        margin-right: 12px;
+        color: #4a4a4a;
+        font-weight: bold;
+        margin-right: .75rem;
         transition: all 0.3s;
         &:last-child {
           margin-right: 0;
         }
         a {
           display: block;
-          padding: 0 10px;
+          padding: 0 .63rem;
         }
       }
-    }
-  }
-  .nav-bar-auth {
-    display: flex;
-    .el-input {
-      transition: all 0.3s;
-      width: 160px;
-      height: 32px;
-      margin-top: 11px;
-      margin-right: 12px;
-      transition: width 0.3s;
-      &.focus {
-        width: 260px;
+      .nav-help {
+        font-size: .75rem;
+        margin-left: 2.25rem;
       }
     }
-    .login {
-      cursor: pointer;
-      &:hover {
-        color: #ff6c5f;
-        transition: color 0.3s;
+    .nav-bar-auth {
+      display: flex;
+      ::v-deep(.el-input) {
+        transition: all 0.3s;
+        width: 13.75rem;
+        height: 2.38rem;
+        margin-right: 1.38rem;
+        transition: width 0.3s;
+        .el-input__inner {
+          color: $primary;
+          height: 2.38rem;
+          font-size: .88rem;
+          border: 2px solid $primary;
+          border-radius: 1.25rem;
+          ::placeholder {
+            color: $primary;
+            font-size: .88rem;
+          }
+        }
+        .el-input__suffix {
+          color: $primary;
+          font-size: 1.13rem;
+          .el-input__suffix-inner {
+            vertical-align: middle;
+          }
+        }
+        &.focus {
+          width: 22.5rem;
+        }
+      }
+      .login {
+        .qxw-login {
+          margin-right: 1rem;
+          width: 58px;
+          height: 38px;
+          background: $primary;
+          border-color: $primary;
+          border-radius: 6px;
+          transition: all 0.3s;
+          &:hover {
+            background: rgba($primary, .85);
+          }
+          &:focus {
+            box-shadow: 0 0 0 0.2rem rgba(174, 152, 190, 0.25);
+          }
+        }
+        .qxw-reg {
+          font-size: .88rem;
+          font-weight: bold;
+          margin-left: 0;
+          color: $primary;
+          &:hover {
+            color: rgba($primary, .75);
+            transition: color 0.3s;
+          }
+        }
       }
     }
   }
