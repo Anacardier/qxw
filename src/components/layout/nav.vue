@@ -39,8 +39,12 @@
         </div>
       </div>
       <div class="nav-m-container container">
-        <div class="nav-bar">xxx</div>
-        <div class="nav-search">搜索</div>
+        <div class="nav-bars">
+          <font-awesome-icon icon="bars" />
+        </div>
+        <div class="nav-search">
+          <font-awesome-icon icon="search" />
+        </div>
       </div>
     </div>
   </div>
@@ -78,7 +82,6 @@ const onBlurChange = () => {
     width: 100%;
     height: 3.38rem;
     padding: 0.44rem 0;
-    background: #ffffff;
     border-top: 2px solid $primary;
     box-shadow: 0px 0.5rem 1rem rgba(10, 10, 10, 0.1);
     backdrop-filter: saturate(180%) blur(1.25rem);
@@ -157,33 +160,6 @@ const onBlurChange = () => {
             width: 22.5rem;
           }
         }
-        .login {
-          .qxw-login {
-            margin-right: 1rem;
-            width: 58px;
-            height: 38px;
-            background: $primary;
-            border-color: $primary;
-            border-radius: 6px;
-            transition: all 0.3s;
-            &:hover {
-              background: rgba($primary, 0.85);
-            }
-            &:focus {
-              box-shadow: 0 0 0 0.2rem rgba(174, 152, 190, 0.25);
-            }
-          }
-          .qxw-reg {
-            font-size: 0.88rem;
-            font-weight: bold;
-            margin-left: 0;
-            color: $primary;
-            &:hover {
-              color: rgba($primary, 0.75);
-              transition: color 0.3s;
-            }
-          }
-        }
       }
     }
   }
@@ -199,6 +175,12 @@ const onBlurChange = () => {
       .nav-m-container {
         display: flex;
         padding: 0 2.13rem;
+        justify-content: space-between;
+        .nav-bars,
+        .nav-search {
+          color: $primary;
+          font-size: 1.25rem;
+        }
       }
     }
   }

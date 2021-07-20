@@ -1,20 +1,22 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import ElementPlus from "element-plus";
-import '@/assets/css/media.css';
+import element from "@/utils/element";
 import "bulma/css/bulma.css"
 import '@/assets/css/base.css';
-import 'element-plus/packages/theme-chalk/src/base.scss'
-import 'element-plus/lib/theme-chalk/index.css';
-import '@/assets/css/resets.scss';
+import '@/assets/css/themes/index.scss';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import fontawesome from "@/fontawesome";
-import router from "./router";
+import router from "@/router";
 
+const app = createApp(App);
 // 加载使用的图标
 library.add(...fontawesome)
 
-console.log(library)
+// element ui
+app.config.globalProperties.$ELEMENT = { size: 'small' }
+element.forEach(element => {
+  app.component(element.name, element)
+})
 
-createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(router).use(ElementPlus, {size: 'small'}).mount('#app')
+app.component('font-awesome-icon', FontAwesomeIcon).use(router).mount('#app')

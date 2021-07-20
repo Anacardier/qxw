@@ -26,11 +26,13 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.path == '/') {
-    next(false)
-  } else {
-    next()
-  }
+  next()
+
+  // if (to.path == '/') {
+  //   next(false)
+  // } else {
+  //   next()
+  // }
 })
 
 export default router

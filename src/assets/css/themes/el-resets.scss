@@ -1,0 +1,47 @@
+// 重置样式 element-ui 样式
+
+// 布局样式
+.el-container {
+  padding: 0;
+}
+
+.el-header {
+  padding: 0;
+}
+
+.el-main {
+  padding: 0;
+  overflow: hidden;
+}
+
+.el-aside {
+  padding: 0;
+}
+
+// 输入框
+.el-input.is-active .el-input__inner,
+.el-input__inner:focus {
+  border-color: $primary;
+  box-shadow: 0 0 0 0.2rem rgba($primary, 0.25);
+}
+
+// 按钮
+.el-button+.el-button {
+  margin: 0;
+}
+
+.el-button--primary:active,
+.el-button--primary:hover,
+.el-button--primary:focus {
+  background: $primary;
+  border-color: $primary;
+}
+
+.el-button--text:active {
+  color: rgba($primary, 0.75);
+}
+
+.el-button--text:hover,
+.el-button--text:focus {
+  color: rgba($primary, 0.75);
+}

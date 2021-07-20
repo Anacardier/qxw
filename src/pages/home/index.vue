@@ -10,44 +10,41 @@
         {{ item }}
       </span>
     </div>
-    <div class="list">
-      <div v-for="(item, idx) in state.gameList" :key="idx" class="item-card">
-        <img :src="item.imgUrl" />
-        <div class="content">
-          <div class="game-title">
-            {{ item.name }}
-          </div>
-          <div class="game-desc ellipsis_3">
-            {{ item.desc }}
-          </div>
-          <div class="game-footer">
-            <div
-              :class="item.collection == 1 ? 'collection active' : 'collection'"
-            >
-              <font-awesome-icon
-                :icon="[item.collection == 1 ? 'fas' : 'far', 'heart']"
-              />
-              {{ item.collection == 1 ? "已收藏" : "收藏" }}
-            </div>
-            <div :class="item.test == 1 ? 'game-test active' : 'game-test'">
-              <font-awesome-icon icon="play" />
-              {{ item.test == 1 ? "已参与测试" : "参与测试" }}
-            </div>
-          </div>
+    <div v-if="state.navActive == 4" class="user-auth">
+      <div v-if="!state.userInfo" class="user-content">
+        <div class="user-nav">
+          <span @click="onChangeUserNav(0)" :class="state.userNavActive == 0? 'active':''">已参与</span>
+          <span @click="onChangeUserNav(1)" :class="state.userNavActive == 1? 'active':''">收藏</span>
         </div>
-        <div v-for="(v, k) in item.tags" :key="k" class="game-tags">
-          <span class="tag-item">{{ v }}</span>
+        <List :list="state.gameList" />
+      </div>
+      <div v-else class="user-tips">
+        <div class="user-text">
+          <p>看样子，</p>
+          <p>您还没有准备好</p>
+          <p>开始这美妙的快乐之旅，</p>
+          <p>注册或登录账户以查看本页面。</p>
+        </div>
+        <div class="login">
+          <el-button class="qxw-login" style="margin-right: 0" type="primary"
+            >注册</el-button
+          >
+          <br />
+          <el-button class="qxw-reg" type="text">登录</el-button>
         </div>
       </div>
     </div>
+    <List v-else :list="state.gameList" />
   </div>
 </template>
 
 <script setup>
 import { reactive } from "vue";
+import List from "./list.vue";
 const state = reactive({
   navList: ["发现", "热门", "最新", "即将上线", "我的"],
   navActive: "0",
+  userNavActive: '0',
   gameList: [
     {
       name: "喵喵水族箱",
@@ -156,116 +153,77 @@ const onChangeNav = (idx) => {
   console.log(idx);
   state.navActive = idx;
 };
+const onChangeUserNav = (idx) => {
+  console.log(idx);
+  state.userNavActive = idx;
+};
 </script>
 
 <style lang="scss" scoped>
 .home {
   margin-top: 2.38rem;
+  position: relative;
   .nav {
     text-align: center;
-    margin-bottom: 2.38rem;
+    height: 1.88rem;
+    margin-bottom: 2rem;
     .nav-item {
       position: relative;
-      height: 1.88rem;
       font-size: 1.5rem;
-      font-weight: bold;
       line-height: 1.88rem;
-      color: $text-bold;
+      color: $text-light;
       margin-right: 2.25rem;
       cursor: pointer;
-      &.nav-active::after {
+      &::after {
         content: "";
         position: absolute;
         left: -0.5rem;
         bottom: 0;
-        width: 100%;
+        width: 0;
         height: 0.5rem;
         background: $primary-s;
         z-index: -1;
+      }
+      &.nav-active {
+        font-weight: bold;
+        color: $text-bold;
+      }
+      &.nav-active::after {
+        transition: width 0.3s;
+        width: 100%;
       }
       &:last-child {
         margin-right: 0;
       }
     }
   }
-  .list {
-    .item-card {
-      display: flex;
-      margin: 0 auto;
-      width: 40rem;
-      height: 11.63rem;
-      background: #ffffff;
-      box-shadow: 0 0 1.88rem rgba(145, 145, 145, 0.32);
-      border-radius: 0.38rem;
-      margin-bottom: 1.5rem;
-      position: relative;
-      img {
-        flex: 0 0 22.5rem;
-        height: 11.63rem;
-        border-radius: 0.38rem;
-      }
-      .content {
-        flex: 0 0 17.5rem;
-        padding: 1rem 2rem;
-        .game-title {
-          height: 1.88rem;
-          font-size: 1.5rem;
-          font-weight: bold;
-          line-height: 1.88rem;
-          color: $text-bold;
-          text-align: center;
-        }
-        .game-desc {
-          font-size: 1.13rem;
-          font-weight: 400;
-          line-height: 1.44rem;
+  .user-auth {
+    .user-content {
+      .user-nav {
+        text-align: center;
+        margin-bottom: 2rem;
+        span {
           color: $text-light;
-          margin-top: 0.63rem;
-          margin-bottom: 1.25rem;
-        }
-        .game-footer {
-          display: flex;
-          justify-content: space-between;
-          & > div {
-            height: 1.25rem;
-            line-height: 1.25rem;
-            font-size: 1rem;
+          font-size: 1.25rem;
+          margin: 0 1.13rem;
+          cursor: pointer;
+          &.active {
             font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s;
-          }
-          .collection {
-            color: $red;
-            &:hover,
-            &.active {
-              color: $red-light;
-            }
-          }
-          .game-test {
             color: $primary-dark;
-            &:hover,
-            &.active {
-              color: $primary;
-            }
           }
         }
       }
-      .game-tags {
-        position: absolute;
-        top: 0.38rem;
-        left: 0.38rem;
-        .tag-item {
-          display: block;
-          width: 4.5rem;
-          height: 2.38rem;
-          line-height: 2.38rem;
-          color: $text-light;
-          font-weight: bold;
-          font-size: 0.81rem;
-          text-align: center;
-          background: #ffffff;
-          box-shadow: 0 0 1.88rem rgba(145, 145, 145, 0.32);
-          border-radius: 0.38rem;
+    }
+    .user-tips {
+      font-weight: bold;
+      font-size: 2.06rem;
+      text-align: center;
+      color: $primary;
+      margin-top: 10.5rem;
+      .user-text {
+        margin-bottom: .5rem;
+        p {
+          line-height: 2.63rem;
         }
       }
     }
@@ -281,59 +239,25 @@ const onChangeNav = (idx) => {
         margin-right: 1.5rem;
       }
     }
-    .list {
-      .item-card {
-        flex-wrap: wrap;
-        width: 18.81rem;
-        margin-bottom: 1.13rem;
-        img {
-          width: 100%;
-          height: 9.75rem;
-        }
-        .content {
-          width: 100%;
-          padding: 1rem 2rem;
-          .game-title {
-            height: 1.88rem;
-            font-size: 1.5rem;
-            font-weight: bold;
-            line-height: 1.88rem;
-            color: $text-bold;
-            text-align: center;
-          }
-          .game-desc {
-            font-size: 1.13rem;
-            font-weight: 400;
-            line-height: 1.44rem;
-            color: $text-light;
-            margin-top: 0.63rem;
+    .user-auth {
+      .user-content {
+        .user-nav {
             margin-bottom: 1.25rem;
+          span {
+            font-size: 1rem;
+            margin: 0 1rem;
           }
-          .game-footer {
-            display: flex;
-            justify-content: space-between;
-            & > div {
-              height: 1.25rem;
-              line-height: 1.25rem;
-              font-size: 1rem;
-              font-weight: bold;
-              cursor: pointer;
-              transition: color 0.3s;
-            }
-            .collection {
-              color: $red;
-              &:hover,
-              &.active {
-                color: $red-light;
-              }
-            }
-            .game-test {
-              color: $primary-dark;
-              &:hover,
-              &.active {
-                color: $primary;
-              }
-            }
+        }
+      }
+      .user-tips {
+        font-size: 1.13rem;
+        text-align: center;
+        color: $primary;
+        margin-top: 5.25rem;
+        .user-text {
+          margin-bottom: 1rem;
+          p {
+            line-height: 2rem;
           }
         }
       }
