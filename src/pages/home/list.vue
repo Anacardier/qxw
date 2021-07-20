@@ -75,6 +75,7 @@ const linkTo = (id) => {
     .content {
       flex: 0 0 17.5rem;
       padding: 1rem 2rem;
+      margin-bottom: 0;
       .game-title {
         height: 1.88rem;
         font-size: 1.5rem;
@@ -145,6 +146,7 @@ const linkTo = (id) => {
       width: 18.81rem;
       height: auto;
       margin-bottom: 1.13rem;
+      cursor: auto;
       img {
         flex: 0 0 100%;
         height: 9.75rem;
@@ -152,7 +154,6 @@ const linkTo = (id) => {
       .content {
         flex: 0 0 100%;
         padding: 0.75rem 1.88rem;
-        margin-bottom: 0;
         .game-title {
           height: 1.56rem;
           font-size: 1.25rem;
@@ -164,29 +165,8 @@ const linkTo = (id) => {
           margin: 0.5rem 0;
         }
         .game-footer {
-          display: flex;
-          justify-content: space-between;
           & > div {
-            height: 1.25rem;
-            line-height: 1.25rem;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s;
-          }
-          .collection {
-            color: $red;
-            &:hover,
-            &.active {
-              color: $red-light;
-            }
-          }
-          .game-test {
-            color: $primary-dark;
-            &:hover,
-            &.active {
-              color: $primary;
-            }
+            cursor: auto;
           }
         }
       }
