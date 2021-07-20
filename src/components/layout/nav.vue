@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="nav-m-container container">
-        <div class="nav-bars">
+        <div @click="mobileMenuDrawer()" class="nav-bars">
           <font-awesome-icon icon="bars" />
         </div>
         <div class="nav-search">
@@ -47,12 +47,14 @@
         </div>
       </div>
     </div>
+
+    <MobileMenu :cancel="cancelDrawer" :drawer="state.mobile.drawerMenu" />
   </div>
 </template>
 
 <script setup>
 import { reactive } from "vue";
-
+import MobileMenu from './mobile/menu.vue'
 const state = reactive({
   list: [
     {
@@ -63,6 +65,9 @@ const state = reactive({
   auth: false,
   isFocus: false,
   keywords: "",
+  mobile: {
+    drawerMenu: false,
+  }
 });
 
 const onFocusChange = () => {
@@ -71,6 +76,15 @@ const onFocusChange = () => {
 const onBlurChange = () => {
   state.isFocus = false;
 };
+
+const mobileMenuDrawer = () => {
+  state.mobile.drawerMenu = true;
+}
+
+const cancelDrawer = () => {
+  state.mobile.drawerMenu = false;
+}
+
 </script>
 
 <style lang="scss" scoped>

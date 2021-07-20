@@ -6,7 +6,7 @@ import '@/assets/css/base.css';
 import '@/assets/css/themes/index.scss';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import fontawesome from "@/fontawesome";
+import fontawesome from "@/utils/fontawesome";
 import router from "@/router";
 
 const app = createApp(App);

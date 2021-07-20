@@ -5,6 +5,7 @@ import {
   ElHeader,
   ElMain,
   ElInput,
+  ElDrawer,
 } from "element-plus";
 const element = [
   ElButton,
@@ -13,6 +14,7 @@ const element = [
   ElHeader,
   ElMain,
   ElInput,
+  ElDrawer,
 ];
 
 export default element;
