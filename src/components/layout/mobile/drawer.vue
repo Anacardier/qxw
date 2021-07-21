@@ -12,14 +12,15 @@
     <div class="close">
       <font-awesome-icon @click="cancel()" icon="times" />
     </div>
-    <div class="list">
-      
+    <div class="content">
+      <MenuBars />
     </div>
   </el-drawer>
 </template>
 
 <script setup>
 import { defineProps } from "vue";
+import MenuBars from './benuBars.vue';
 defineProps({
   drawer: Boolean,
   cancel: Function,
@@ -32,8 +33,11 @@ defineProps({
   .close {
     color: $primary;
     font-size: 1.75rem;
-    margin-top: .81rem;
+    margin-top: 0.81rem;
     margin-bottom: 2rem;
+  }
+  .content {
+    padding: 0 2.25rem;
   }
 }
 </style>

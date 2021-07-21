@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="nav-m-container container">
-        <div @click="mobileMenuDrawer()" class="nav-bars">
+        <div @click="openDrawer()" class="nav-bars">
           <font-awesome-icon icon="bars" />
         </div>
         <div class="nav-search">
@@ -47,14 +47,20 @@
         </div>
       </div>
     </div>
-
-    <MobileMenu :cancel="cancelDrawer" :drawer="state.mobile.drawerMenu" />
+    <Drawer :cancel="cancelDrawer" :drawer="state.drawer" />
+    <!-- <MobileMenu
+      :keywords="state.keywords"
+      :list="state.list"
+      :cancel="cancelDrawer"
+      :drawer="state.mobile.drawerMenu"
+    /> -->
   </div>
 </template>
 
 <script setup>
 import { reactive } from "vue";
-import MobileMenu from './mobile/menu.vue'
+import Drawer from "./mobile/drawer.vue";
+// import MobileMenu from "./mobile/menu.vue";
 const state = reactive({
   list: [
     {
@@ -65,9 +71,7 @@ const state = reactive({
   auth: false,
   isFocus: false,
   keywords: "",
-  mobile: {
-    drawerMenu: false,
-  }
+  drawer: false,
 });
 
 const onFocusChange = () => {
@@ -77,14 +81,13 @@ const onBlurChange = () => {
   state.isFocus = false;
 };
 
-const mobileMenuDrawer = () => {
-  state.mobile.drawerMenu = true;
-}
+const openDrawer = () => {
+  state.drawer = true;
+};
 
 const cancelDrawer = () => {
-  state.mobile.drawerMenu = false;
-}
-
+  state.drawer = false;
+};
 </script>
 
 <style lang="scss" scoped>
@@ -158,7 +161,7 @@ const cancelDrawer = () => {
             font-size: 0.88rem;
             border: 2px solid $primary;
             border-radius: 1.25rem;
-            ::placeholder {
+            &::placeholder {
               color: $primary;
               font-size: 0.88rem;
             }
