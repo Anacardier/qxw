@@ -1,6 +1,6 @@
 <template>
   <el-drawer
-    custom-class="mobile-menu"
+    custom-class="mobile-drawer"
     title="我是标题"
     direction="ltr"
     v-model="drawer"
@@ -13,14 +13,13 @@
       <font-awesome-icon @click="cancel()" icon="times" />
     </div>
     <div class="content">
-      <MenuBars />
+      <slot></slot>
     </div>
   </el-drawer>
 </template>
 
 <script setup>
 import { defineProps } from "vue";
-import MenuBars from './benuBars.vue';
 defineProps({
   drawer: Boolean,
   cancel: Function,
@@ -28,16 +27,13 @@ defineProps({
 </script>
 
 <style lang="scss">
-.mobile-menu {
+.mobile-drawer {
   padding: 0 2.25rem;
   .close {
     color: $primary;
     font-size: 1.75rem;
     margin-top: 0.81rem;
     margin-bottom: 2rem;
-  }
-  .content {
-    padding: 0 2.25rem;
   }
 }
 </style>

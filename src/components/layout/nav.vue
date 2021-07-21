@@ -9,7 +9,7 @@
           <div class="nav-list">
             <ul>
               <li
-                class="nav-item"
+                class="nav-item active"
                 v-for="(item, index) in state.list"
                 :key="index"
               >
@@ -19,7 +19,7 @@
               </li>
             </ul>
             <div class="nav-help">
-              <router-link to="/home"> 如何参与抢鲜玩？ </router-link>
+              <router-link to="/home"> 如何参与抢先玩？ </router-link>
             </div>
           </div>
           <div class="nav-bar-auth">
@@ -28,9 +28,12 @@
               v-model="state.keywords"
               @focus="onFocusChange"
               @blur="onBlurChange"
-              suffix-icon="el-icon-search"
-              placeholder="请输入内容"
-            ></el-input>
+              placeholder="搜索"
+            >
+              <template #suffix>
+                <font-awesome-icon icon="search" />
+              </template>
+            </el-input>
             <div class="login">
               <el-button class="qxw-login" type="primary">登录</el-button>
               <el-button class="qxw-reg" type="text">注册</el-button>
@@ -39,28 +42,26 @@
         </div>
       </div>
       <div class="nav-m-container container">
-        <div @click="openDrawer()" class="nav-bars">
+        <div @click="openDrawer('bars')" class="nav-bars">
           <font-awesome-icon icon="bars" />
         </div>
         <div class="nav-search">
-          <font-awesome-icon icon="search" />
+          <font-awesome-icon icon="search" @click="openDrawer('search')" />
         </div>
       </div>
     </div>
-    <Drawer :cancel="cancelDrawer" :drawer="state.drawer" />
-    <!-- <MobileMenu
-      :keywords="state.keywords"
-      :list="state.list"
-      :cancel="cancelDrawer"
-      :drawer="state.mobile.drawerMenu"
-    /> -->
+    <Drawer :cancel="cancelDrawer" :drawer="state.drawer">
+      <Search v-if="state.isSearch" :keywords="state.keywords" />
+      <MenuBars v-if="state.isBars" :list="state.list" />
+    </Drawer>
   </div>
 </template>
 
 <script setup>
 import { reactive } from "vue";
 import Drawer from "./mobile/drawer.vue";
-// import MobileMenu from "./mobile/menu.vue";
+import MenuBars from './mobile/benuBars.vue';
+import Search from './mobile/search.vue';
 const state = reactive({
   list: [
     {
@@ -72,6 +73,8 @@ const state = reactive({
   isFocus: false,
   keywords: "",
   drawer: false,
+  isBars: false,
+  isSearch: false,
 });
 
 const onFocusChange = () => {
@@ -81,23 +84,34 @@ const onBlurChange = () => {
   state.isFocus = false;
 };
 
-const openDrawer = () => {
-  state.drawer = true;
-};
 
+const openDrawer = (type) => {
+  state.drawer = true;
+  if (type == 'bars') {
+    state.isBars = true;
+    state.isSearch = false;
+    return;
+  }
+  if (type == 'search') {
+    state.isSearch = true;
+    state.isBars = false;
+    return;
+  }
+};
 const cancelDrawer = () => {
   state.drawer = false;
 };
+
 </script>
 
 <style lang="scss" scoped>
 .qxw-header {
-  height: 3.38rem;
+  height: 3.375rem;
   .qxw-nav {
     position: fixed;
     top: 0;
     width: 100%;
-    height: 3.38rem;
+    height: 3.375rem;
     padding: 0.44rem 0;
     border-top: 2px solid $primary;
     box-shadow: 0px 0.5rem 1rem rgba(10, 10, 10, 0.1);
@@ -111,8 +125,8 @@ const cancelDrawer = () => {
       margin: 0 auto;
     }
     .logo {
-      width: 3.25rem;
-      height: 2.38rem;
+      width: 2.375rem;
+      height: 2.375rem;
       margin-right: 2rem;
       overflow: hidden;
       img {
@@ -124,22 +138,29 @@ const cancelDrawer = () => {
       display: flex;
       width: 100%;
       height: 100%;
-      line-height: 2.38rem;
+      line-height: 2.375rem;
       font-size: 0.88rem;
       justify-content: space-between;
       .nav-list {
         display: flex;
         .nav-item {
-          color: #4a4a4a;
-          font-weight: bold;
           margin-right: 0.75rem;
-          transition: all 0.3s;
+          &.active {
+            a {
+              font-weight: bold;
+              color: $text-bold;
+            }
+          }
           &:last-child {
             margin-right: 0;
           }
           a {
             display: block;
             padding: 0 0.63rem;
+            &:hover {
+              font-weight: bold;
+              color: $text-bold;
+            }
           }
         }
         .nav-help {
@@ -152,15 +173,16 @@ const cancelDrawer = () => {
         ::v-deep(.el-input) {
           transition: all 0.3s;
           width: 13.75rem;
-          height: 2.38rem;
-          margin-right: 1.38rem;
+          height: 2.375rem;
+          margin-right: 1.375rem;
           transition: width 0.3s;
           .el-input__inner {
             color: $primary;
-            height: 2.38rem;
+            height: 2.375rem;
             font-size: 0.88rem;
             border: 2px solid $primary;
             border-radius: 1.25rem;
+            padding-right: 2.5rem;
             &::placeholder {
               color: $primary;
               font-size: 0.88rem;
@@ -169,8 +191,11 @@ const cancelDrawer = () => {
           .el-input__suffix {
             color: $primary;
             font-size: 1.13rem;
+            margin-right: 0.75rem;
             .el-input__suffix-inner {
               vertical-align: middle;
+              position: relative;
+              top: 1px;
             }
           }
           &.focus {

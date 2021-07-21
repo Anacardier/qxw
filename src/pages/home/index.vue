@@ -174,6 +174,7 @@ const onChangeUserNav = (idx) => {
       color: $text-light;
       margin-right: 2.25rem;
       cursor: pointer;
+      transition: all .3s;
       &::after {
         content: "";
         position: absolute;
@@ -184,6 +185,7 @@ const onChangeUserNav = (idx) => {
         background: $primary-s;
         z-index: -1;
       }
+      &:hover,
       &.nav-active {
         font-weight: bold;
         color: $text-bold;
@@ -207,7 +209,9 @@ const onChangeUserNav = (idx) => {
           font-size: 1.25rem;
           margin: 0 1.13rem;
           cursor: pointer;
+          &:hover,
           &.active {
+          transition: all .3s;
             font-weight: bold;
             color: $primary-dark;
           }

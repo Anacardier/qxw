@@ -8,7 +8,11 @@
       </div>
     </div>
     <div class="nav-help">
-      <router-link to="/home"> 如何参与抢鲜玩？ </router-link>
+      <router-link to="/home"> 如何参与抢先玩？ </router-link>
+    </div>
+    <div class="login">
+      <el-button class="qxw-reg" type="primary">注册</el-button>
+      <el-button class="qxw-login" type="text">登录</el-button>
     </div>
   </div>
 </template>
@@ -30,7 +34,7 @@ defineProps({
   .nav-help {
     margin-bottom: 2rem;
     a {
-      font-size: 1.5rem;
+      font-size: 1rem;
       color: $text-light;
     }
   }

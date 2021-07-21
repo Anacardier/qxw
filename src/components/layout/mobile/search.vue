@@ -2,10 +2,9 @@
   <div class="qxw-search">
     <el-input
       v-model="keywords"
-      placeholder="请输入搜索内容"
-      :input-style="{...inputStyle}"
+      placeholder="搜索"
     >
-      <template #suffix>
+      <template #prefix>
         <font-awesome-icon icon="search" />
       </template>
     </el-input>
@@ -22,25 +21,31 @@ defineProps({
 
 <style lang="scss" scoped>
 .qxw-search {
+  display: flex;
+  justify-content: space-between;
   ::v-deep(.el-input) {
     transition: all 0.3s;
-    width: 19rem;
-    height: 2rem;
+    width: 18.938rem;
+    height: 2.313rem;
     .el-input__inner {
       color: $primary;
+      width: 18.938rem;
+      height: 2.313rem;
+      line-height: 2.313rem;
       font-size: 0.88rem;
       border: 2px solid $primary;
       border-radius: 1.25rem;
+      padding-left: 2.5rem;
       &::placeholder {
         color: $primary;
-        font-size: 0.88rem;
+        font-size: 1rem;
       }
     }
-    .el-input__suffix {
+    .el-input__prefix {
       color: $primary;
       font-size: 1.13rem;
-      margin-right: .75rem;
-      .el-input__suffix-inner {
+      margin-left: .75rem;
+      .svg-inline--fa {
         vertical-align: middle;
       }
     }
