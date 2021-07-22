@@ -6,6 +6,10 @@ import {
   ElMain,
   ElInput,
   ElDrawer,
+  ElTimeline,
+  ElTimelineItem,
+  ElCard,
+  ElAffix,
 } from "element-plus";
 const element = [
   ElButton,
@@ -15,6 +19,10 @@ const element = [
   ElMain,
   ElInput,
   ElDrawer,
+  ElTimeline,
+  ElTimelineItem,
+  ElCard,
+  ElAffix,
 ];
 
 export default element;

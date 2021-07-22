@@ -4,7 +4,9 @@
       <Nav />
     </el-header>
     <el-main>
-      <router-view />
+      <!-- <keep-alive> -->
+        <router-view />
+      <!-- </keep-alive> -->
     </el-main>
   </el-container>
 </template>
@@ -14,4 +16,7 @@ import Nav from "./nav.vue"
 </script>
 
 <style lang="scss" scoped>
+.qxw {
+  min-width: 23.438rem;
+}
 </style>

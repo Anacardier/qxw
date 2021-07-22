@@ -116,7 +116,7 @@ const cancelDrawer = () => {
     border-top: 2px solid $primary;
     box-shadow: 0px 0.5rem 1rem rgba(10, 10, 10, 0.1);
     backdrop-filter: saturate(180%) blur(1.25rem);
-    z-index: 999;
+    z-index: 99;
     .nav-m-container {
       display: none;
     }
