@@ -53,7 +53,7 @@
           <div class="user-setting-title text-bold">玩家身份认证</div>
           <div class="user-ident-content">
             <el-button v-if="!state.userInfo.ident" type="primary">身份认证</el-button>
-            <span v-else>已认证</span>
+            <span class="text-light" v-else>已认证</span>
           </div>
         </div>
         <div class="user-setting-other user-setting-item">
@@ -191,10 +191,10 @@ const openUrl = (url) => {
     padding-bottom: 1rem;
     .user-content {
       margin: 0 0.5rem;
+      padding: 0 1.813rem;
       padding-bottom: 2.125rem;
     }
     .user-info {
-      padding: 0 1.813rem;
       padding-top: 1.5rem;
       flex-wrap: wrap;
       .user-msg {
@@ -237,6 +237,15 @@ const openUrl = (url) => {
           margin-top: 0;
           margin-right: 0.75rem;
         }
+      }
+    }
+    .user-setting {
+      .user-setting-item {
+        margin-bottom: 1.5rem;
+      }
+      .user-setting-title {
+        font-size: 1.125rem;
+        margin-bottom: .75rem;
       }
     }
   }
