@@ -278,6 +278,7 @@ console.log(params);
       margin-top: 1.5rem;
       .game-imgs {
         position: relative;
+        min-width: 11.75rem;
         max-width: 22.5rem;
         box-shadow: 0 0 1.875rem rgba(145, 145, 145, 0.32);
         img {

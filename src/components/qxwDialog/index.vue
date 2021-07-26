@@ -68,4 +68,11 @@ defineProps({
     }
   }
 }
+@media screen and (max-width: 750px) {
+  .qxw-dialog {
+    ::v-deep(.el-dialog) {
+      width: 95% !important;
+    }
+  }
+}
 </style>

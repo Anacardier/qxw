@@ -16,11 +16,10 @@
 </template>
 
 <script setup>
-import { getCurrentInstance, reactive } from "vue";
+import { getCurrentInstance, reactive, watch } from "vue";
 import GameCard from "@/components/gameCard";
 import UserList from "@/components/userList";
 const { proxy } = getCurrentInstance();
-const { params } = proxy.$route;
 const state = reactive({
   navList: ["游戏", "讨论", "用户"],
   navActive: "0",
@@ -146,10 +145,12 @@ const state = reactive({
   ]
 });
 const onChangeNav = (idx) => {
-  console.log(idx);
   state.navActive = idx;
 };
-console.log(params);
+
+watch(() => proxy.$route, (val) => {
+  state.navActive = val.query.navIdx || 0
+})
 </script>
 
 <style lang="scss" scoped>

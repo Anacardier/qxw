@@ -30,14 +30,14 @@
   margin: 0;
 }
 .el-button--primary.el-button--small {
-  background: $primary;
-  border-color: $primary;
+  background: $primary !important;
+  border-color: $primary !important;
 }
 .el-button--primary:active,
 .el-button--primary:hover,
 .el-button--primary:focus {
-  background: $primary;
-  border-color: $primary;
+  background: $primary !important;
+  border-color: $primary !important;
 }
 
 .el-button--text:active {

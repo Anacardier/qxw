@@ -42,6 +42,9 @@
     animation: barJump 1.5s ease 1;
   }
 }
+.animation-barJump.svg-inline--fa:hover {
+  animation: barJump 1.5s ease 1;
+}
 .svg-inline--fa {
   transform: rotate(0);
   transition: all .3s;
@@ -50,4 +53,7 @@
   .svg-inline--fa {
     transform: rotate(180deg);
   }
+}
+.animation-rotate.svg-inline--fa:hover {
+  transform: rotate(180deg);
 }

@@ -29,11 +29,50 @@
               @focus="onFocusChange"
               @blur="onBlurChange"
               placeholder="搜索"
+              @keyup.enter="search"
             >
               <template #suffix>
                 <font-awesome-icon icon="search" />
               </template>
             </el-input>
+            <div
+              @click.stop="(e) => e.preventDefault()"
+              :class="[
+                'search-history',
+                state.searchHistory && !state.keywords ? 'show' : 'hide',
+              ]"
+            >
+              <div class="search-history-title text-bold">
+                <span>推荐</span>
+                <font-awesome-icon class="animation-rotate" icon="sync" />
+              </div>
+              <div class="search-content-list">
+                <div
+                  class="search-content-item ellipsis"
+                  v-for="(item, idx) in state.recommendList"
+                  :key="idx"
+                  @click="() => searchHistoryLink(item)"
+                >
+                  {{ item }}
+                </div>
+              </div>
+              <template v-if="state.historyList && state.historyList.length > 0">
+                <div class="search-history-title text-bold">
+                  <span>搜索历史</span>
+                  <font-awesome-icon @click="cancelHistoryLog" icon="trash-alt" />
+                </div>
+                <div class="search-content-list">
+                  <div
+                    class="search-content-item ellipsis"
+                    v-for="(item, idx) in state.historyList"
+                    :key="idx"
+                    @click="() => searchHistoryLink(item)"
+                  >
+                    {{ item }}
+                  </div>
+                </div>
+              </template>
+            </div>
             <div class="login">
               <el-button class="qxw-login" type="primary">登录</el-button>
               <el-button class="qxw-reg" type="text">注册</el-button>
@@ -58,10 +97,13 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { getCurrentInstance, reactive } from "vue";
 import Drawer from "./mobile/drawer.vue";
-import MenuBars from './mobile/benuBars.vue';
-import Search from './mobile/search.vue';
+import MenuBars from "./mobile/benuBars.vue";
+import Search from "./mobile/search.vue";
+
+const { proxy } = getCurrentInstance();
+let qxwSearchKeyWords = JSON.parse(localStorage.getItem("qxwSearchKeyWords")) || []
 const state = reactive({
   list: [
     {
@@ -69,8 +111,19 @@ const state = reactive({
       link: "/home",
     },
   ],
+  recommendList: [
+    "江湖十一江湖十一江湖十一江湖十一",
+    "喵喵水族箱喵喵水",
+    "超世界绿洲",
+    "喵喵水族箱",
+    "江湖十一",
+    "超世界绿洲",
+  ],
+  historyList: qxwSearchKeyWords ? qxwSearchKeyWords.slice(0, 6) : qxwSearchKeyWords,
+  navIdx: "0",
   auth: false,
   isFocus: false,
+  searchHistory: false,
   keywords: "",
   drawer: false,
   isBars: false,
@@ -79,20 +132,76 @@ const state = reactive({
 
 const onFocusChange = () => {
   state.isFocus = true;
+  state.searchHistory = true;
 };
 const onBlurChange = () => {
   state.isFocus = false;
 };
 
+// 清除历史记录
+const cancelHistoryLog = () => {
+  proxy.$confirm("确定清除全部历史记录吗？", "提示", {
+      confirmButtonText: "确定",
+      cancelButtonText: "取消",
+      type: "warning",
+      closeOnClickModal: false,
+    })
+    .then(() => {
+      localStorage.setItem("qxwSearchKeyWords", null);
+      state.historyList = [];
+      proxy.$message({
+        type: "success",
+        message: "删除成功!",
+      });
+    })
+    .catch(() => {
+      proxy.$message({
+        type: "info",
+        message: "已取消删除",
+      });
+    });
+};
+
+// 搜索历史进行搜索
+const searchHistoryLink = (item) => {
+  state.keywords = item;
+  state.searchHistory = false;
+  state.navIdx = 0;
+  search();
+};
+// 搜索
+const search = () => {
+  // 搜索时保存历史记录
+  if (qxwSearchKeyWords && qxwSearchKeyWords.length > 0) {
+    let idx = qxwSearchKeyWords.indexOf(state.keywords);
+    if (idx != "-1") {
+      qxwSearchKeyWords.splice(idx, 1);
+      qxwSearchKeyWords.unshift(state.keywords);
+    } else {
+      qxwSearchKeyWords.unshift(state.keywords);
+    }
+  } else {
+    qxwSearchKeyWords.unshift(state.keywords);
+  }
+  localStorage.setItem("qxwSearchKeyWords", JSON.stringify(qxwSearchKeyWords));
+  state.historyList = qxwSearchKeyWords.slice(0, 6);
+  proxy.$router.push({
+    path: "/search",
+    query: {
+      keywords: state.keywords,
+      navIdx: state.navIdx,
+    },
+  });
+};
 
 const openDrawer = (type) => {
   state.drawer = true;
-  if (type == 'bars') {
+  if (type == "bars") {
     state.isBars = true;
     state.isSearch = false;
     return;
   }
-  if (type == 'search') {
+  if (type == "search") {
     state.isSearch = true;
     state.isBars = false;
     return;
@@ -102,6 +211,11 @@ const cancelDrawer = () => {
   state.drawer = false;
 };
 
+document.addEventListener("click", () => {
+  if (!state.isFocus) {
+    state.searchHistory = false;
+  }
+});
 </script>
 
 <style lang="scss" scoped>
@@ -139,12 +253,12 @@ const cancelDrawer = () => {
       width: 100%;
       height: 100%;
       line-height: 2.375rem;
-      font-size: 0.88rem;
+      font-size: 0.75rem;
       justify-content: space-between;
       .nav-list {
         display: flex;
         .nav-item {
-          margin-right: 0.75rem;
+          font-size: 0.75rem;
           &.active {
             a {
               font-weight: bold;
@@ -170,9 +284,10 @@ const cancelDrawer = () => {
       }
       .nav-bar-auth {
         display: flex;
+        position: relative;
         ::v-deep(.el-input) {
           transition: all 0.3s;
-          width: 13.75rem;
+          width: 18rem;
           height: 2.375rem;
           margin-right: 1.375rem;
           transition: width 0.3s;
@@ -198,8 +313,48 @@ const cancelDrawer = () => {
               top: 1px;
             }
           }
-          &.focus {
-            width: 22.5rem;
+        }
+        .search-history {
+          position: absolute;
+          top: 3.8rem;
+          left: 0;
+          width: 21.25rem;
+          padding: 1rem 1.125rem;
+          background: #ffffff;
+          box-shadow: 0 0 1.875rem rgba(0, 0, 0, 0.16);
+          border-radius: 0.25rem;
+          transition: all 0.3s;
+          visibility: hidden;
+          opacity: 0;
+          &.show {
+            top: 3.25rem;
+            opacity: 1;
+            visibility: visible;
+          }
+          .search-history-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.125rem;
+            .svg-inline--fa {
+              cursor: pointer;
+            }
+          }
+          .search-content-list {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            .search-content-item {
+              flex: 0 0 46%;
+              height: 1.875rem;
+              line-height: 1.875rem;
+              font-size: 0.875rem;
+              margin-right: 4%;
+              cursor: pointer;
+              &:nth-child(2n) {
+                margin-right: 0;
+              }
+            }
           }
         }
       }
