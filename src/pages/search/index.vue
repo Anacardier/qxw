@@ -1,5 +1,5 @@
 <template>
-  <div class="home container">
+  <div class="search container">
     <div class="common-nav">
       <span
         v-for="(item, idx) in state.navList"
@@ -10,41 +10,20 @@
         {{ item }}
       </span>
     </div>
-    <div v-if="state.navActive == 4" class="user-auth">
-      <div v-if="!state.userInfo" class="user-content">
-        <div class="user-nav">
-          <span @click="onChangeUserNav(0)" :class="state.userNavActive == 0? 'active':''">已参与</span>
-          <span @click="onChangeUserNav(1)" :class="state.userNavActive == 1? 'active':''">收藏</span>
-        </div>
-        <List :list="state.gameList" />
-      </div>
-      <div v-else class="user-tips">
-        <div class="user-text">
-          <p>看样子，</p>
-          <p>您还没有准备好</p>
-          <p>开始这美妙的快乐之旅，</p>
-          <p>注册或登录账户以查看本页面。</p>
-        </div>
-        <div class="login">
-          <el-button class="qxw-login" style="margin-right: 0" type="primary"
-            >注册</el-button
-          >
-          <br />
-          <el-button class="qxw-reg" type="text">登录</el-button>
-        </div>
-      </div>
-    </div>
-    <List v-else :list="state.gameList" />
+    <game-card v-if="state.navActive == 0" :list="state.gameList" />
+    <user-list v-if="state.navActive == 2" :list="state.userList" />
   </div>
 </template>
 
 <script setup>
-import { reactive } from "vue";
-import List from "@/components/gameCard";
+import { getCurrentInstance, reactive } from "vue";
+import GameCard from "@/components/gameCard";
+import UserList from "@/components/userList";
+const { proxy } = getCurrentInstance();
+const { params } = proxy.$route;
 const state = reactive({
-  navList: ["发现", "热门", "最新", "即将上线", "我的"],
+  navList: ["游戏", "讨论", "用户"],
   navActive: "0",
-  userNavActive: '0',
   gameList: [
     {
       name: "喵喵水族箱",
@@ -147,88 +126,36 @@ const state = reactive({
         "https://cdn.indieclub.net/2021-06-22/1624375193-453165-2021527-155046.jpg",
     },
   ],
+  userList: [
+    {
+      name: 'fancer',
+      time: '2017年5月24日',
+      sign: '创乐坊知名话痨，画饼达人-“不可爱的fancer”',
+      care: 1,
+      ident: '创乐坊站长',
+      avatar: 'https://cdn.indieclub.net/2021-06-22/1624375193-453165-2021527-155046.jpg',
+    },
+    {
+      name: 'fancer',
+      time: '2017年5月24日',
+      sign: '创乐坊知名话痨，画饼达人-“不可爱的fancer”',
+      care: 0,
+      ident: '创乐坊站长',
+      avatar: 'https://cdn.indieclub.net/2021-06-22/1624375193-453165-2021527-155046.jpg',
+    }
+  ]
 });
-
 const onChangeNav = (idx) => {
   console.log(idx);
   state.navActive = idx;
 };
-const onChangeUserNav = (idx) => {
-  console.log(idx);
-  state.userNavActive = idx;
-};
+console.log(params);
 </script>
 
 <style lang="scss" scoped>
-.home {
+.search {
   position: relative;
-  .user-auth {
-    .user-content {
-      .user-nav {
-        text-align: center;
-        margin-bottom: 2rem;
-        span {
-          color: $text-light;
-          font-size: 1.25rem;
-          margin: 0 1.13rem;
-          cursor: pointer;
-          &:hover,
-          &.active {
-          transition: all .3s;
-            font-weight: bold;
-            color: $primary-dark;
-          }
-        }
-      }
-    }
-    .user-tips {
-      font-weight: bold;
-      font-size: 2.06rem;
-      text-align: center;
-      color: $primary;
-      margin-top: 10.5rem;
-      .user-text {
-        margin-bottom: .5rem;
-        p {
-          line-height: 2.63rem;
-        }
-      }
-    }
-  }
 }
 @media screen and (max-width: 750px) {
-  .home {
-    margin-top: 1.13rem;
-    .nav {
-      margin-bottom: 1.25rem;
-      .nav-item {
-        font-size: 1.13rem;
-        margin-right: 1.5rem;
-      }
-    }
-    .user-auth {
-      .user-content {
-        .user-nav {
-            margin-bottom: 1.25rem;
-          span {
-            font-size: 1rem;
-            margin: 0 1rem;
-          }
-        }
-      }
-      .user-tips {
-        font-size: 1.13rem;
-        text-align: center;
-        color: $primary;
-        margin-top: 5.25rem;
-        .user-text {
-          margin-bottom: 1rem;
-          p {
-            line-height: 2rem;
-          }
-        }
-      }
-    }
-  }
 }
 </style>

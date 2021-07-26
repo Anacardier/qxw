@@ -1,7 +1,6 @@
 <template>
   <el-drawer
     custom-class="mobile-drawer"
-    title="我是标题"
     direction="ltr"
     v-model="drawer"
     :modal="false"

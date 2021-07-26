@@ -8,3 +8,39 @@ $primary-s:#cbbdd5;
 $primary-light:#bfaecc;
 $primary:#ae98be;
 $primary-dark:#8d6ea4;
+
+
+.red-light {
+  color: $red-light;
+}
+.red {
+  color: $red;
+}
+.text-light {
+  color: $text-light;
+}
+.text-bold {
+  color: $text-bold;
+  font-weight: bold;
+}
+.primary {
+  color: $primary;
+}
+.primary-xs {
+  color: $primary-xs;
+}
+.primary-s {
+  color: $primary-s;
+}
+
+.primary-light {
+  color: $primary-light;
+}
+
+.primary-dark {
+  color: $primary-dark;
+  font-weight: bold;
+}
+
+
+

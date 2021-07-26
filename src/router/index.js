@@ -1,7 +1,8 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import Layout from "@/components/layout";
-import Home from "@/pages/home";
-import Detail from "@/pages/detail";
+import Layout from "@/components/layout/index.vue";
+import Home from "@/pages/home/index.vue";
+import Search from "@/pages/search/index.vue";
+import Detail from "@/pages/detail/index.vue";
 const router = createRouter({
   routes: [
     {
@@ -19,6 +20,14 @@ const router = createRouter({
             parent: "home",
           },
           component: Home,
+        },
+        {
+          path: "/search",
+          name: "search",
+          meta: {
+            parent: "search",
+          },
+          component: Search,
         },
         {
           path: "/detail/:id",

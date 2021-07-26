@@ -1,0 +1,41 @@
+.common-nav {
+  text-align: center;
+  height: 1.88rem;
+  margin-top: 2.38rem;
+  margin-bottom: 2rem;
+  .nav-item {
+    position: relative;
+    font-size: 1.5rem;
+    line-height: 1.88rem;
+    color: $text-light;
+    margin-right: 2.25rem;
+    cursor: pointer;
+    transition: all .3s;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: -0.5rem;
+      bottom: 0;
+      width: 0;
+      height: 0.5rem;
+      background: $primary-s;
+      z-index: -1;
+    }
+
+    &:hover,
+    &.nav-active {
+      font-weight: bold;
+      color: $text-bold;
+    }
+
+    &.nav-active::after {
+      transition: width 0.3s;
+      width: 100%;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

@@ -4,10 +4,14 @@ import {
   faSearch,
   faPlay,
   faTimes,
-  faChevronLeft
+  faChevronLeft,
+  faCheckSquare,
+  faPlus,
+  faCheckCircle
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faHeart as farHeart,
+  faSquare
 } from "@fortawesome/free-regular-svg-icons";
-const fontawesome = [fasHeart, farHeart, faPlay, faBars, faSearch, faTimes, faChevronLeft];
+const fontawesome = [fasHeart, farHeart, faPlay, faBars, faSearch, faTimes, faChevronLeft, faSquare, faCheckSquare, faPlus, faCheckCircle];
 export default fontawesome;

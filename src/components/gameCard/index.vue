@@ -16,7 +16,7 @@
         </div>
         <div class="game-footer">
           <div
-            :class="item.collection == 1 ? 'collection barJump active' : 'collection barJump'"
+            :class="item.collection == 1 ? 'collection animation-barJump active' : 'collection animation-barJump'"
           >
             <font-awesome-icon
               :icon="[item.collection == 1 ? 'fas' : 'far', 'heart']"
@@ -24,7 +24,7 @@
             {{ item.collection == 1 ? "已收藏" : "收藏" }}
           </div>
           <div
-            :class="item.test == 1 ? 'game-test barJump active' : 'game-test barJump'"
+            :class="item.test == 1 ? 'game-test animation-barJump active' : 'game-test animation-barJump'"
           >
             <font-awesome-icon icon="play" />
             {{ item.test == 1 ? "已参与测试" : "参与测试" }}

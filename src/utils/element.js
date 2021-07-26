@@ -10,6 +10,8 @@ import {
   ElTimelineItem,
   ElCard,
   ElAffix,
+  ElDialog,
+  ElCheckbox
 } from "element-plus";
 const element = [
   ElButton,
@@ -23,6 +25,8 @@ const element = [
   ElTimelineItem,
   ElCard,
   ElAffix,
+  ElDialog,
+  ElCheckbox
 ];
 
 export default element;
