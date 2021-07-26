@@ -3,6 +3,8 @@ import Layout from "@/components/layout/index.vue";
 import Home from "@/pages/home/index.vue";
 import Search from "@/pages/search/index.vue";
 import Detail from "@/pages/detail/index.vue";
+import User from "@/pages/user/index.vue";
+import Setting from "@/pages/user/setting.vue";
 const router = createRouter({
   routes: [
     {
@@ -37,6 +39,22 @@ const router = createRouter({
           },
           component: Detail,
         },
+        {
+          path: '/user/:id',
+          name: 'user',
+          meta: {
+            parent: 'user',
+          },
+          component: User,
+        },
+        {
+          path: '/user/:id/setting',
+          name: 'setting',
+          meta: {
+            parent: 'user',
+          },
+          component: Setting,
+        }
       ],
     },
   ],

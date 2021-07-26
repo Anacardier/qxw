@@ -1,12 +1,10 @@
 <template>
   <div class="detail container">
-    <!-- <el-affix target="html" :offset="0"> -->
-    <div class="detail-bars">
+    <div class="common-bars">
       <div class="bars-back" @click="goback">
         <font-awesome-icon icon="chevron-left" />
       </div>
     </div>
-    <!-- </el-affix> -->
     <div class="detail-box">
       <div class="game-bg">
         <img
@@ -61,22 +59,22 @@
           </div>
         </div>
         <div class="game-info">
-          <div class="info-nav">
+          <div class="common-nav">
             <span
               @click="onChangeNav(0)"
               :class="
-                state.navActive == 0 ? 'info-nav-item active' : 'info-nav-item'
+                state.navActive == 0 ? 'nav-item nav-active' : 'nav-item'
               "
               >游戏详情</span
             >
             <span
               @click="onChangeNav(1)"
               :class="
-                state.navActive == 1 ? 'info-nav-item active' : 'info-nav-item'
+                state.navActive == 1 ? 'nav-item nav-active' : 'nav-item'
               "
               >日志</span
             >
-            <span class="info-nav-item">玩家社群</span>
+            <span class="nav-item">玩家社群</span>
           </div>
           <div class="info-content">
             <GameDesc v-if="state.navActive == 0" />
@@ -360,43 +358,6 @@ console.log(params);
     }
     .game-info {
       margin-top: 2.25rem;
-      .info-nav {
-        height: 1.88rem;
-        position: relative;
-        text-align: center;
-        z-index: 1;
-        .info-nav-item {
-          position: relative;
-          font-size: 1.5rem;
-          line-height: 1.88rem;
-          color: $text-light;
-          margin-right: 2.25rem;
-          cursor: pointer;
-          transition: all 0.3s;
-          &::after {
-            content: "";
-            position: absolute;
-            left: -0.5rem;
-            bottom: 0;
-            width: 0;
-            height: 0.5rem;
-            background: $primary-s;
-            z-index: -1;
-          }
-          &:hover,
-          &.active {
-            font-weight: bold;
-            color: $text-bold;
-          }
-          &.active::after {
-            transition: width 0.3s;
-            width: 100%;
-          }
-          &:last-child {
-            margin-right: 0;
-          }
-        }
-      }
       .info-content {
         padding: 2rem 0;
       }
@@ -449,32 +410,6 @@ console.log(params);
       margin: 0 0.5rem;
       margin-bottom: 1rem;
     }
-    .el-affix {
-      .el-affix--fixed {
-        width: 100%;
-        .detail-bars {
-          margin: 0;
-          height: 2.75rem;
-          border-radius: 0;
-          box-shadow: 0px 0.5rem 1rem rgba(10, 10, 10, 0.1);
-          backdrop-filter: saturate(180%) blur(1.25rem);
-          .svg-inline--fa {
-            margin-top: 0.75rem;
-          }
-        }
-      }
-    }
-    .detail-bars {
-      margin: 0 0.5rem;
-      height: 2.25rem;
-      line-height: 2.25rem;
-      padding: 0 1.75rem;
-      .bars-back {
-        width: 1.25rem;
-        font-size: 1.313rem;
-        cursor: auto;
-      }
-    }
     .content {
       padding: 0 2.125rem;
       .game-bg {
@@ -516,7 +451,7 @@ console.log(params);
         margin-top: 1rem;
         .info-nav {
           height: 1.438rem;
-          .info-nav-item {
+          .nav-item {
             font-size: 1.125rem;
             height: 1.438rem;
             margin-right: 1.5rem;

@@ -199,13 +199,6 @@ const onChangeUserNav = (idx) => {
 @media screen and (max-width: 750px) {
   .home {
     margin-top: 1.13rem;
-    .nav {
-      margin-bottom: 1.25rem;
-      .nav-item {
-        font-size: 1.13rem;
-        margin-right: 1.5rem;
-      }
-    }
     .user-auth {
       .user-content {
         .user-nav {

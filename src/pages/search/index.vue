@@ -156,6 +156,4 @@ console.log(params);
 .search {
   position: relative;
 }
-@media screen and (max-width: 750px) {
-}
 </style>
