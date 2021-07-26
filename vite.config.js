@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import path from "path";
 import vue from '@vitejs/plugin-vue'
+import autoprefixer from 'autoprefixer'
 import styleImport from 'vite-plugin-style-import'
 
 // https://vitejs.dev/config/
@@ -30,6 +31,11 @@ export default defineConfig({
     },
   },
   css: {
+    postcss: {
+      plugins: [
+        autoprefixer
+      ]
+    },
     preprocessorOptions: {
       scss: {
         additionalData: '@import "@/assets/css/themes/_variables.scss";'

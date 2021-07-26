@@ -129,7 +129,6 @@ const state = reactive({
   isBars: false,
   isSearch: false,
 });
-
 const onFocusChange = () => {
   state.isFocus = true;
   state.searchHistory = true;
@@ -227,7 +226,7 @@ document.addEventListener("click", () => {
     width: 100%;
     height: 3.375rem;
     padding: 0.44rem 0;
-    border-top: 2px solid $primary;
+    // border-top: 2px solid $primary;
     box-shadow: 0px 0.5rem 1rem rgba(10, 10, 10, 0.1);
     backdrop-filter: saturate(180%) blur(1.25rem);
     z-index: 99;

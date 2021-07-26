@@ -40,7 +40,7 @@
 
 <script setup>
 import { reactive } from "vue";
-import List from "@/components/gameCard";
+import List from "@/components/gameCard/index.vue";
 const state = reactive({
   navList: ["发现", "热门", "最新", "即将上线", "我的"],
   navActive: "0",

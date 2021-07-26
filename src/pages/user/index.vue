@@ -67,7 +67,7 @@
 
 <script setup>
 import { getCurrentInstance, reactive } from "vue";
-import GameCard from "@/components/gameCard";
+import GameCard from "@/components/gameCard/index.vue";
 const { proxy } = getCurrentInstance();
 const { params } = proxy.$route;
 const state = reactive({

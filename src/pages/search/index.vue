@@ -17,8 +17,8 @@
 
 <script setup>
 import { getCurrentInstance, reactive, watch } from "vue";
-import GameCard from "@/components/gameCard";
-import UserList from "@/components/userList";
+import GameCard from "@/components/gameCard/index.vue";
+import UserList from "@/components/userList/index.vue";
 const { proxy } = getCurrentInstance();
 const state = reactive({
   navList: ["游戏", "讨论", "用户"],
